@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000/api/location"; // ← vervang met jouw backend URL bij deploy
+const API_URL = "https://ijsboer-tracker-production.up.railway.app/api/location";
 const INTERVAL_MS = 30000;
 
 let actief = false;

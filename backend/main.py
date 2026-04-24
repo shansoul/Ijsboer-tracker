@@ -12,7 +12,7 @@ app = FastAPI()
 # Vervang "*" met het echte domein zodra bekend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://shansoul.github.io"],
     allow_methods=["GET", "POST"],
 )
 
