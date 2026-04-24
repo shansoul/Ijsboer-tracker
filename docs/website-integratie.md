@@ -4,8 +4,7 @@ Plak het onderstaande HTML-snippet op de plek waar de kaart moet verschijnen.
 
 ## Wat je moet aanpassen
 
-1. **`API_URL`** → vervang `https://JOUW_DOMEIN` met de echte backend URL
-2. **`setView([52.3676, 4.9041], 15)`** → vervang de coördinaten met de wijk van de ijsboer
+1. **`setView([52.3676, 4.9041], 15)`** → vervang de coördinaten met de wijk van de ijsboer
 
 ## HTML Snippet
 
@@ -15,7 +14,7 @@ Plak het onderstaande HTML-snippet op de plek waar de kaart moet verschijnen.
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const API_URL = "https://JOUW_DOMEIN/api/location"; // ← aanpassen
+const API_URL = "https://ijsboer-tracker-production.up.railway.app/api/location";
 const POLL_INTERVAL = 30000;
 
 const map = L.map("ijsboer-map").setView([52.3676, 4.9041], 15); // ← coördinaten aanpassen
@@ -82,18 +81,17 @@ setInterval(updateLocation, POLL_INTERVAL);
 Verander `API_URL` tijdelijk naar:
 
 ```
-https://JOUW_DOMEIN/api/location/test
+https://ijsboer-tracker-production.up.railway.app/api/location/test
 ```
 
 De pin beweegt dan automatisch in een cirkel — zo kan het webteam de kaart testen zonder dat de ijsboer hoeft te rijden.
 
 ## CORS instellen
 
-Geef de backend-beheerder jouw domeinnaam zodat CORS correct wordt ingesteld.  
-In `backend/main.py` staat nu `allow_origins=["*"]` — vervang `"*"` met jouw domein zodra bekend, bijv.:
+CORS staat ingesteld op `https://shansoul.github.io`. Wil je de kaart op een ander domein embedden, voeg dat dan toe in `backend/main.py`:
 
 ```python
-allow_origins=["https://www.ijsboer-website.nl"]
+allow_origins=["https://shansoul.github.io", "https://www.ijsboer-website.nl"]
 ```
 
 ## Backend starten (voor de beheerder)
