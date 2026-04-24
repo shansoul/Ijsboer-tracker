@@ -9,10 +9,9 @@ from storage import get_location, save_location, save_location_inactive
 
 app = FastAPI()
 
-# Vervang "*" met het echte domein zodra bekend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://shansoul.github.io"],
+    allow_origins=["https://shansoul.github.io", "https://ijsvantijs.nl", "https://www.ijsvantijs.nl"],
     allow_methods=["GET", "POST"],
 )
 

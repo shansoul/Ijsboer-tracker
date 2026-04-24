@@ -4,8 +4,7 @@ Plak het onderstaande HTML-snippet op de plek waar de kaart moet verschijnen.
 
 ## Wat je moet aanpassen
 
-1. **`API_URL`** → vervang `https://JOUW_DOMEIN` met de echte backend URL
-2. **`setView([52.3676, 4.9041], 15)`** → vervang de coördinaten met de wijk van de ijsboer
+1. **`setView([52.3676, 4.9041], 15)`** → vervang de coördinaten met de wijk van de ijsboer
 
 ## HTML Snippet
 
@@ -15,7 +14,7 @@ Plak het onderstaande HTML-snippet op de plek waar de kaart moet verschijnen.
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-const API_URL = "https://JOUW_DOMEIN/api/location"; // ← aanpassen
+const API_URL = "https://ijsboer-tracker-production.up.railway.app/api/location";
 const POLL_INTERVAL = 30000;
 
 const map = L.map("ijsboer-map").setView([52.3676, 4.9041], 15); // ← coördinaten aanpassen
@@ -24,11 +23,10 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "© OpenStreetMap contributors"
 }).addTo(map);
 
-const ijsjesIcon = L.divIcon({
-  html: "🍦",
-  className: "",
-  iconSize: [30, 30],
-  iconAnchor: [15, 15]
+const ijsbusIcon = L.icon({
+  iconUrl: "https://shansoul.github.io/ijsboer-tracker/Ijsbus.png",
+  iconSize: [116, 66],
+  iconAnchor: [58, 66]
 });
 
 let marker = null;
@@ -47,7 +45,7 @@ async function updateLocation() {
 
     const pos = [data.lat, data.lng];
     if (!marker) {
-      marker = L.marker(pos, { icon: ijsjesIcon }).addTo(map);
+      marker = L.marker(pos, { icon: ijsbusIcon }).addTo(map);
     } else {
       marker.setLatLng(pos);
     }
@@ -82,26 +80,16 @@ setInterval(updateLocation, POLL_INTERVAL);
 Verander `API_URL` tijdelijk naar:
 
 ```
-https://JOUW_DOMEIN/api/location/test
+https://ijsboer-tracker-production.up.railway.app/api/location/test
 ```
 
-De pin beweegt dan automatisch in een cirkel — zo kan het webteam de kaart testen zonder dat de ijsboer hoeft te rijden.
+De ijsbus beweegt dan automatisch in een cirkel — zo kan het webteam de kaart testen zonder dat de ijsboer hoeft te rijden.
 
-## CORS instellen
+## CORS
 
-Geef de backend-beheerder jouw domeinnaam zodat CORS correct wordt ingesteld.  
-In `backend/main.py` staat nu `allow_origins=["*"]` — vervang `"*"` met jouw domein zodra bekend, bijv.:
+De backend staat ingesteld om verzoeken toe te staan van:
+- `https://ijsvantijs.nl`
+- `https://www.ijsvantijs.nl`
+- `https://shansoul.github.io`
 
-```python
-allow_origins=["https://www.ijsboer-website.nl"]
-```
-
-## Backend starten (voor de beheerder)
-
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-Gratis hosting: **Railway** of **Render** (gratis tier, geen creditcard nodig).
+Wil je de kaart op een ander domein embedden, meld dit dan aan de beheerder.
