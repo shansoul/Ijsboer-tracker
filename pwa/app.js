@@ -1,4 +1,4 @@
-const API_URL = "https://JOUW_DOMEIN/api/location"; // ← aanpassen naar jouw backend URL
+const API_URL = "http://localhost:8000/api/location"; // ← vervang met jouw backend URL bij deploy
 const INTERVAL_MS = 30000;
 
 let actief = false;
