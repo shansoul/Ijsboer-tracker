@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a73e8" />
+  <title>IJsboer Tracker</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f4ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      color: #333;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    #status {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 40px;
+      text-align: center;
+      min-height: 1.4em;
+    }
+
+    #toggle-btn {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: none;
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      background: #1a73e8;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      transition: background 0.2s, transform 0.1s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #toggle-btn:active {
+      transform: scale(0.96);
+    }
+
+    #toggle-btn.actief {
+      background: #d93025;
+    }
+
+    #coords {
+      margin-top: 32px;
+      font-size: 0.8rem;
+      color: #aaa;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍦 IJsboer Tracker</h1>
+  <p id="status">Druk op Start om de rit te beginnen.</p>
+  <button id="toggle-btn" onclick="toggle()">Start</button>
+  <p id="coords"></p>
+
+  <script src="app.js"></script>
+</body>
+</html>
